@@ -1,0 +1,28 @@
+url: "https://leomos2022.github.io/computacion-bioinspirada"
+baseurl: "/computacion-bioinspirada"
+
+title: "Sistema Bioinspirado para Cultivos Inteligentes"
+description: "Implementación práctica con análisis de ROI empresarial del 182%"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Exclude from processing
+exclude:
+  - .venv/
+  - __pycache__/
+  - "*.pyc"
+  - "*.py"
+  - requirements.txt
+  - README_GUIA_FORO.md
+  - GUIA_VISUALIZACIONES.md
+
+# Include files
+include:
+  - index.html
+  - reporte_ejecutivo_completo.html
+  - dashboard_bioinspirado.html
+  - "*.png"
+  - "*.md"
