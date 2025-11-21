@@ -121,8 +121,11 @@ Este proyecto fue desarrollado para el **Foro de Discusión: Impacto del anális
 ## 👥 Equipo
 
 **Grupo 5 - Computación Bioinspirada**
-- Leonardo Mosquera - Implementación técnica y análisis
-- Jessica Silva - Fundamentación teórica y retroalimentación
+- **Leonardo Mosquera** - Implementación técnica, análisis de datos y desarrollo del sistema
+- **Jessica Silva** - Fundamentación teórica, análisis conceptual y retroalimentación académica
+
+**Institución:** Corporación Universitaria Minuto de Dios  
+**Curso:** NRC-3333-Computación Bioinspirada
 
 ## 📄 Licencia
 

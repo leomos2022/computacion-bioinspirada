@@ -326,6 +326,8 @@ def generar_reporte_web_completo():
                 <h1>🧬 Sistema Bioinspirado para Cultivos Inteligentes</h1>
                 <p style="font-size: 1.2em; margin: 10px 0;">Reporte Ejecutivo - Impacto Empresarial Demostrado</p>
                 <p>Generado el: {datetime.now().strftime('%d/%m/%Y %H:%M')}</p>
+                <p style="font-size: 0.9em; margin-top: 10px;">Desarrollado por: <strong>Leonardo Mosquera - Jessica Silva</strong> (Grupo 5)</p>
+                <p style="font-size: 0.8em;">Corporación Universitaria Minuto de Dios | NRC-3333-Computación Bioinspirada</p>
             </div>
             
             <div class="section">
