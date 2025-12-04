@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizaciones - Foro Semana 5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0424D9 0%, #031473 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #031CA6 0%, #030C40 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #dee2e6;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 25px 30px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: #e9ecef;
+            color: #031CA6;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #031CA6;
+            border-bottom-color: #0424D9;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .visualization-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            color: #031CA6;
+            font-size: 32px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #0424D9;
+        }
+
+        .section-description {
+            color: #495057;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .image-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #0424D9;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(4, 36, 217, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            color: #031CA6;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, rgba(4, 36, 217, 0.1) 0%, rgba(3, 20, 115, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #0424D9;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(4, 36, 217, 0.3);
+        }
+
+        .download-button:hover {
+            background: #031CA6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(4, 36, 217, 0.4);
+        }
+
+        .stats-banner {
+            background: linear-gradient(135deg, #030C40 0%, #0D1326 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #0D1326;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            background: #0424D9;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(4, 36, 217, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: #031CA6;
+            transform: translateY(-3px);
+        }
+
+        /* Modal para zoom de imágenes */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            cursor: zoom-out;
+        }
+
+        .modal img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Visualizaciones Avanzadas</h1>
+            <p>Dashboard Científico y Póster Ejecutivo</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('dashboard')">
+                📈 Dashboard 12 Gráficos
+            </button>
+            <button class="tab-button" onclick="showTab('infografia')">
+                🎨 Infografía Ejecutiva
+            </button>
+            <button class="tab-button" onclick="showTab('readme')">
+                📚 Documentación
+            </button>
+        </div>
+
+        <div class="content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="visualization-section">
+                    <h2 class="section-title">📊 Dashboard de Análisis Comparativo</h2>
+                    <p class="section-description">
+                        <strong style="color: #031CA6; font-size: 20px;">Visualización integral de 12 gráficos científicos profesionales</strong><br><br>
+                        Dashboard completo que presenta el análisis exhaustivo del algoritmo evolutivo comparado 
+                        con métodos estadísticos tradicionales (Regresión Logística, SVM, Random Forest, Redes Neuronales). 
+                        Incluye análisis de convergencia evolutiva, comparación multi-criterio de rendimiento, 
+                        proyecciones financieras a 5 años y métricas clave de evaluación técnica.
+                    </p>
+
+                    <div class="image-container">
+                        <img src="analisis_comparativo_completo.png" 
+                             alt="Dashboard de 12 Gráficos" 
+                             onclick="openModal(this.src)"
+                             onerror="this.src=''; this.alt='Imagen no disponible. Ejecuta main_foro_semana_5.py para generar las visualizaciones.';">
+                        <div class="image-caption">
+                            Clic en la imagen para ampliar
+                        </div>
+                    </div>
+
+                    <h3 style="color: #031CA6; font-size: 24px; margin: 40px 0 20px;">🔍 Gráficos Incluidos</h3>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📈</div>
+                            <div class="feature-title">1. Evolución del Fitness</div>
+                            <div class="feature-description">
+                                Curva de convergencia a lo largo de 50 generaciones mostrando mejora progresiva del algoritmo.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <div class="feature-title">2. Comparación de Precisión</div>
+                            <div class="feature-description">
+                                Barplot comparativo de 5 métodos con intervalos de confianza (EA: 92% vs otros).
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-title">3. Tiempos de Ejecución</div>
+                            <div class="feature-description">
+                                Análisis de eficiencia computacional (EA: 4.5s, comparable a métodos tradicionales).
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-title">4. Análisis de Pareto</div>
+                            <div class="feature-description">
+                                Trade-off precisión vs tiempo mostrando frontera óptima de soluciones.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🕸️</div>
+                            <div class="feature-title">5. Radar Chart Multi-criterio</div>
+                            <div class="feature-description">
+                                5 dimensiones: precisión, velocidad, adaptabilidad, interpretabilidad, escalabilidad.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">💰</div>
+                            <div class="feature-title">6. Proyección ROI</div>
+                            <div class="feature-description">
+                                Proyección financiera a 5 años con 3 escenarios (conservador, moderado, optimista).
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📉</div>
+                            <div class="feature-title">7. Distribución de Fitness</div>
+                            <div class="feature-description">
+                                Histograma de la población final mostrando convergencia hacia soluciones óptimas.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🧬</div>
+                            <div class="feature-title">8. Diversidad Genética</div>
+                            <div class="feature-description">
+                                Evolución temporal de heterogeneidad poblacional (alta inicial → baja final).
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🎲</div>
+                            <div class="feature-title">9. Matriz de Confusión</div>
+                            <div class="feature-description">
+                                Análisis de verdaderos positivos/negativos y falsos positivos/negativos.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">🔬</div>
+                            <div class="feature-title">10. Feature Importance</div>
+                            <div class="feature-description">
+                                Top 20 genes más relevantes identificados por el algoritmo evolutivo.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <div class="feature-title">11. Curvas de Aprendizaje</div>
+                            <div class="feature-description">
+                                Convergencia con diferentes tamaños de muestra (escalabilidad del método).
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">⚙️</div>
+                            <div class="feature-title">12. Análisis de Sensibilidad</div>
+                            <div class="feature-description">
+                                Impacto de hiperparámetros: población, generaciones, tasa de mutación.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-banner">
+                        <h3 style="text-align: center; margin-bottom: 30px; font-size: 28px; color: white; font-weight: 700;">🎯 Métricas Destacadas del Algoritmo</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #4ADE80; font-size: 56px;">92%</div>
+                                <div class="stat-label" style="color: white; opacity: 1;">Precisión Alcanzada</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #60A5FA; font-size: 56px;">4.5s</div>
+                                <div class="stat-label" style="color: white; opacity: 1;">Tiempo por Análisis</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #FBBF24; font-size: 56px;">+4.5%</div>
+                                <div class="stat-label" style="color: white; opacity: 1;">Mejora vs Mejor Método</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #A78BFA; font-size: 56px;">50</div>
+                                <div class="stat-label" style="color: white; opacity: 1;">Generaciones</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infografía Tab -->
+            <div id="infografia" class="tab-content">
+                <div class="visualization-section">
+                    <h2 class="section-title">🎨 Infografía Ejecutiva</h2>
+                    <p class="section-description">
+                        <strong style="color: #031CA6; font-size: 20px;">Póster científico profesional tipo conferencia internacional</strong><br><br>
+                        Visualización ejecutiva diseñada para stakeholders, inversores y presentaciones académicas. 
+                        Presenta los hallazgos clave del estudio en formato visual atractivo y profesional, 
+                        destilando la información más relevante del análisis comparativo de algoritmos evolutivos 
+                        aplicados a genómica de precisión.
+                    </p>
+
+                    <div class="image-container">
+                        <img src="infografia_ejecutiva.png" 
+                             alt="Infografía Ejecutiva" 
+                             onclick="openModal(this.src)"
+                             onerror="this.src=''; this.alt='Imagen no disponible. Ejecuta main_foro_semana_5.py para generar las visualizaciones.';">
+                        <div class="image-caption">
+                            Clic en la imagen para ampliar
+                        </div>
+                    </div>
+
+                    <h3 style="color: #031CA6; font-size: 24px; margin: 40px 0 20px;">📋 Elementos Incluidos</h3>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-title">Resumen Ejecutivo</div>
+                            <div class="feature-description">
+                                Síntesis del caso de estudio y objetivos principales en formato visual atractivo.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <div class="feature-title">Métricas Clave</div>
+                            <div class="feature-description">
+                                Tarjetas destacadas con las cifras más importantes: 92% precisión, ROI 42-258%, etc.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📈</div>
+                            <div class="feature-title">Gráficos Principales</div>
+                            <div class="feature-description">
+                                4 visualizaciones destacadas que resumen los hallazgos más relevantes del estudio.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">💡</div>
+                            <div class="feature-title">Conclusiones</div>
+                            <div class="feature-description">
+                                Recomendaciones estratégicas y hallazgos clave para stakeholders y tomadores de decisión.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <div class="feature-title">Referencias APA 7</div>
+                            <div class="feature-description">
+                                Bibliografía científica completa en formato APA séptima edición.
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">👥</div>
+                            <div class="feature-title">Información Institucional</div>
+                            <div class="feature-description">
+                                Autores, universidad, curso y docente con identidad visual profesional.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="download-section">
+                        <h3 style="color: #031CA6; margin-bottom: 20px;">📥 Descargar Visualizaciones</h3>
+                        <a href="infografia_ejecutiva.png" download class="download-button">
+                            📄 Descargar Infografía (PNG)
+                        </a>
+                        <p style="margin-top: 20px; color: #666;">
+                            Formato: PNG de alta resolución (300 DPI) | Tamaño: 24×36 pulgadas
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- README Tab -->
+            <div id="readme" class="tab-content">
+                <div class="visualization-section">
+                    <h2 class="section-title">📚 Documentación Técnica Completa</h2>
+                    <p class="section-description">
+                        README exhaustivo con 50+ páginas de documentación técnica completa. Incluye fundamentación teórica 
+                        con 40+ referencias científicas, diseño detallado del algoritmo evolutivo, arquitectura del sistema, 
+                        análisis económico-financiero, patrones clínicos documentados, instrucciones de instalación paso a paso 
+                        y bibliografía completa en formato APA 7.
+                    </p>
+
+                    <div style="background: linear-gradient(135deg, rgba(4, 36, 217, 0.05) 0%, rgba(3, 20, 115, 0.05) 100%); padding: 50px; border-radius: 15px; margin: 40px 0; text-align: center;">
+                        <div style="max-width: 700px; margin: 0 auto;">
+                            <div style="font-size: 72px; margin-bottom: 20px;">📖</div>
+                            <h3 style="color: #031CA6; font-size: 32px; margin-bottom: 20px; font-weight: 700;">
+                                README Completo
+                            </h3>
+                            <p style="color: #495057; font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                                <strong>Contenido incluido:</strong> Información académica • Marco teórico • Arquitectura del sistema • 
+                                Algoritmo evolutivo • Datos genómicos • Métodos comparativos • Análisis económico • 
+                                Impacto clínico • Guía de instalación • Referencias APA 7 • Contacto
+                            </p>
+                            <p style="color: #666; font-size: 16px; margin-top: 25px;">
+                                <strong>Formato:</strong> Markdown | <strong>Extensión:</strong> ~50 páginas | <strong>Referencias:</strong> 50+ citas científicas
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="download-section">
+                        <h3 style="color: #031CA6; margin-bottom: 20px;">📥 Acceder a Documentación</h3>
+                        <a href="README_COMPLETO.md" target="_blank" class="download-button">
+                            📖 Ver README Completo
+                        </a>
+                        <a href="README_COMPLETO.md" download class="download-button">
+                            💾 Descargar README
+                        </a>
+                        <p style="margin-top: 20px; color: #666;">
+                            Formato: Markdown | Tamaño: ~50 páginas | Referencias: 50+ citas APA 7
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Foro Semana 5 - Computación Bioinspirada</strong></p>
+            <p>👨‍💻 Leonardo Mosquera (000922268) | 👩‍💻 Jessica Silva (000918680)</p>
+            <p style="margin-top: 15px;">NRC-3333 | Corporación Universitaria Minuto de Dios</p>
+            <p style="margin-top: 15px;">
+                <a href="../portal_foros.html" style="color: #0424D9; text-decoration: none;">← Volver al Portal Principal</a>
+            </p>
+        </div>
+    </div>
+
+    <a href="../portal_foros.html" class="back-button">← Volver</a>
+
+    <!-- Modal para zoom de imágenes -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="">
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Ocultar todos los tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Mostrar el tab seleccionado
+            document.getElementById(tabName).classList.add('active');
+
+            // Actualizar botones
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal(src) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

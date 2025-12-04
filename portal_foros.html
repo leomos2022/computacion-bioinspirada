@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foros Académicos - Computación Bioinspirada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0424D9 0%, #031473 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #031CA6 0%, #030C40 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .university-logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .university-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .course-info {
+            font-size: 18px;
+            margin-bottom: 5px;
+            opacity: 0.95;
+        }
+
+        .professor {
+            font-size: 16px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            opacity: 0.9;
+        }
+
+        .date {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Participants Section */
+        .participants {
+            background: linear-gradient(135deg, #0424D9 0%, #031CA6 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .participant {
+            text-align: center;
+        }
+
+        .participant-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .participant-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .participant-id {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .participant-role {
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #dee2e6;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 25px 30px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: #f8f9fa;
+            font-size: 18px;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 250px;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #031CA6;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #031CA6;
+            border-bottom: 3px solid #0424D9;
+        }
+
+        .nav-tab-icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .nav-tab-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .nav-tab-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #0424D9 0%, #031473 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #0424D9;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #031CA6;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card-content {
+            font-size: 15px;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #0424D9 0%, #031473 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .card-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(4, 36, 217, 0.4);
+        }
+
+        /* Resource Links */
+        .resource-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .resource-link:hover {
+            background: white;
+            border-color: #0424D9;
+            transform: translateX(5px);
+        }
+
+        .resource-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .resource-text {
+            flex: 1;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .resource-desc {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 25px;
+            }
+
+            .university-name {
+                font-size: 22px;
+            }
+
+            .course-info {
+                font-size: 16px;
+            }
+
+            .participants {
+                gap: 30px;
+                padding: 20px;
+            }
+
+            .nav-tab {
+                padding: 15px 20px;
+                min-width: 200px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #28a745;
+            color: white;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .badge.new {
+            background: #dc3545;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="university-logo">🎓</div>
+            <div class="university-name">Corporación Universitaria Minuto de Dios</div>
+            <div class="course-info">📚 NRC-3333 - Computación Bioinspirada</div>
+            <div class="professor">👨‍🏫 Profesor: Geovanny Alberto Catamuscay Medina</div>
+            <div class="date">📅 Fecha: 4 de Diciembre de 2025</div>
+        </div>
+
+        <!-- Participants -->
+        <div class="participants">
+            <div class="participant">
+                <div class="participant-icon">👨‍💻</div>
+                <div class="participant-name">Leonardo Mosquera</div>
+                <div class="participant-id">ID: 000922268</div>
+                <div class="participant-role">Grupo 5</div>
+            </div>
+            <div class="participant">
+                <div class="participant-icon">👩‍💻</div>
+                <div class="participant-name">Jessica Silva</div>
+                <div class="participant-id">ID: 000918680</div>
+                <div class="participant-role">Grupo 5</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('inicio')">
+                <span class="nav-tab-icon">🏠</span>
+                <div class="nav-tab-title">Inicio</div>
+                <div class="nav-tab-subtitle">Bienvenida</div>
+            </button>
+            <button class="nav-tab" onclick="showSection('foro-semana-3')">
+                <span class="nav-tab-icon">🌱</span>
+                <div class="nav-tab-title">Foro Semana 3</div>
+                <div class="nav-tab-subtitle">Sistema Bioinspirado</div>
+            </button>
+            <button class="nav-tab" onclick="showSection('foro-semana-5')">
+                <span class="nav-tab-icon">🧬</span>
+                <div class="nav-tab-title">Foro Semana 5</div>
+                <div class="nav-tab-subtitle">Análisis de Datos</div>
+                <span class="badge new">NUEVO</span>
+            </button>
+        </div>
+
+        <!-- Content Sections -->
+        
+        <!-- Inicio Section -->
+        <div id="inicio" class="content-section active">
+            <div class="section-header">
+                <div class="section-title">🎓 Bienvenidos a Nuestros Foros Académicos</div>
+                <div class="section-description">Exploración de Sistemas Bioinspirados y Análisis de Datos Biológicos</div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🌾</div>
+                    <div class="card-title">Foro Semana 3</div>
+                    <div class="card-content">
+                        <strong>Sistema Bioinspirado para Cultivos Inteligentes</strong>
+                        <p style="margin-top: 10px;">
+                            Implementación de un Sistema Inmunológico Artificial para detección de anomalías 
+                            en cultivos agrícolas, demostrando ventajas competitivas en la gestión empresarial 
+                            del sector agroindustrial.
+                        </p>
+                        <ul style="margin-top: 15px; list-style-position: inside;">
+                            <li>✅ Precisión: 92%</li>
+                            <li>⚡ Velocidad: 48x más rápido</li>
+                            <li>💰 ROI: 182%</li>
+                            <li>📊 40 células de memoria</li>
+                        </ul>
+                    </div>
+                    <a href="#" onclick="showSection('foro-semana-3'); return false;" class="card-link">
+                        Ver Foro Completo →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🧬</div>
+                    <div class="card-title">Foro Semana 5</div>
+                    <div class="card-content">
+                        <strong>Eficiencia de los Métodos de Análisis de Datos</strong>
+                        <p style="margin-top: 10px;">
+                            Algoritmo Evolutivo para análisis genómico en bioinformática, aplicado a medicina 
+                            personalizada. Comparación rigurosa con métodos estadísticos tradicionales.
+                        </p>
+                        <ul style="margin-top: 15px; list-style-position: inside;">
+                            <li>✅ Precisión: 92%</li>
+                            <li>🚀 Reducción tiempos: 35-45%</li>
+                            <li>💼 ROI Año 1: 42-258%</li>
+                            <li>🏥 Vidas salvadas: 2,000-5,000/año</li>
+                        </ul>
+                    </div>
+                    <a href="#" onclick="showSection('foro-semana-5'); return false;" class="card-link">
+                        Ver Foro Completo →
+                    </a>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <h2 style="text-align: center; color: #2a5298; margin-bottom: 20px;">📚 Acerca de Nuestro Trabajo</h2>
+                <div class="card">
+                    <div class="card-content">
+                        <p style="margin-bottom: 15px;">
+                            Este portal integra los trabajos desarrollados durante el curso de <strong>Computación Bioinspirada</strong>, 
+                            donde hemos explorado cómo los principios biológicos pueden inspirar soluciones computacionales innovadoras.
+                        </p>
+                        <p style="margin-bottom: 15px;">
+                            Nuestros proyectos demuestran la aplicabilidad práctica de algoritmos bioinspirados en dos contextos empresariales 
+                            reales: agricultura inteligente y medicina personalizada, con resultados cuantificables y validados.
+                        </p>
+                        <p>
+                            Cada foro incluye implementaciones completas en Python, análisis comparativos rigurosos, visualizaciones 
+                            profesionales y recomendaciones estratégicas fundamentadas en evidencia técnica y económica.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Foro Semana 3 Section -->
+        <div id="foro-semana-3" class="content-section">
+            <div class="section-header">
+                <div class="section-title">🌱 Foro Semana 3</div>
+                <div class="section-description">Sistema Bioinspirado para Cultivos Inteligentes</div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧬</div>
+                <div class="card-title">Sistema Inmunológico Artificial</div>
+                <div class="card-content">
+                    <p><strong>Contexto:</strong> Implementación de algoritmos bioinspirados en el sistema inmunológico humano 
+                    para detectar anomalías en cultivos agrícolas.</p>
+                    
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">🎯 Objetivos del Proyecto</h3>
+                    <ul style="list-style-position: inside; line-height: 1.8;">
+                        <li>Detectar patrones de estrés hídrico, deficiencias nutricionales y plagas</li>
+                        <li>Reducir pérdidas agrícolas mediante detección temprana</li>
+                        <li>Demostrar ROI cuantificable para gestión empresarial</li>
+                        <li>Comparar con métodos estadísticos tradicionales</li>
+                    </ul>
+
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">📊 Resultados Clave</h3>
+                    <ul style="list-style-position: inside; line-height: 1.8;">
+                        <li><strong>Precisión:</strong> 92% vs 75% métodos tradicionales (+19%)</li>
+                        <li><strong>Velocidad:</strong> &lt;5 minutos vs 2-4 horas (48x más rápido)</li>
+                        <li><strong>ROI:</strong> $180,000 USD anuales proyectados (182%)</li>
+                        <li><strong>Reducción pérdidas:</strong> 35-45% en operaciones medianas</li>
+                    </ul>
+
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">🔬 Tecnologías Implementadas</h3>
+                    <ul style="list-style-position: inside; line-height: 1.8;">
+                        <li>Algoritmo de Selección Negativa (Negative Selection)</li>
+                        <li>Teoría de Selección Clonal (Clonal Selection)</li>
+                        <li>Memoria Inmunológica Adaptativa</li>
+                        <li>Python: NumPy, Pandas, Scikit-learn, Plotly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2a5298; margin: 30px 0 20px;">📁 Recursos Disponibles</h2>
+            
+            <div class="resource-links">
+                <a href="reporte_ejecutivo_completo.html" class="resource-link" target="_blank">
+                    <span class="resource-icon">📊</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Reporte Ejecutivo Completo</div>
+                        <div class="resource-desc">Dashboard interactivo con gráficos de Plotly y análisis detallado</div>
+                    </div>
+                </a>
+
+                <a href="index.html" class="resource-link" target="_blank">
+                    <span class="resource-icon">🏠</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Página Principal del Proyecto</div>
+                        <div class="resource-desc">Landing page con información general y enlaces</div>
+                    </div>
+                </a>
+
+                <a href="retroalimentacion_jessica_apa.md" class="resource-link" target="_blank">
+                    <span class="resource-icon">📝</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Retroalimentación Académica</div>
+                        <div class="resource-desc">Análisis crítico con referencias APA 7 y fundamentación teórica</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/leomos2022/computacion-bioinspirada" class="resource-link" target="_blank">
+                    <span class="resource-icon">💻</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Repositorio GitHub</div>
+                        <div class="resource-desc">Código fuente completo y documentación técnica</div>
+                    </div>
+                </a>
+
+                <a href="https://leomos2022.github.io/computacion-bioinspirada/" class="resource-link" target="_blank">
+                    <span class="resource-icon">🌐</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Demostración en Vivo</div>
+                        <div class="resource-desc">GitHub Pages con visualizaciones interactivas</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Foro Semana 5 Section -->
+        <div id="foro-semana-5" class="content-section">
+            <div class="section-header">
+                <div class="section-title">🧬 Foro Semana 5</div>
+                <div class="section-description">Eficiencia de los Métodos de Análisis de Datos</div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔬</div>
+                <div class="card-title">Algoritmo Evolutivo para Análisis Genómico</div>
+                <div class="card-content">
+                    <p><strong>Contexto:</strong> Una startup de bioinformática desarrolló un algoritmo evolutivo inspirado 
+                    en la selección natural para analizar grandes volúmenes de datos genómicos y detectar patrones de 
+                    mutación para medicina personalizada.</p>
+                    
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">🎯 Caso de Estudio</h3>
+                    <ul style="list-style-position: inside; line-height: 1.8;">
+                        <li><strong>Datos:</strong> 3.2 GB de secuenciación genómica por paciente</li>
+                        <li><strong>Objetivo:</strong> Detectar mutaciones en cáncer de pulmón (EGFR, TP53, KRAS)</li>
+                        <li><strong>Aplicación:</strong> Guiar tratamientos personalizados de oncología de precisión</li>
+                        <li><strong>Desafío:</strong> Equilibrar precisión diagnóstica vs eficiencia computacional</li>
+                    </ul>
+
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">📊 Resultados Comparativos</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <thead style="background: #f8f9fa;">
+                            <tr>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Método</th>
+                                <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Precisión</th>
+                                <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Tiempo</th>
+                                <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Adaptabilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #dee2e6;">Regresión Logística</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">78%</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">2.3s</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">Baja</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #dee2e6;">SVM (RBF)</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">82%</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">4.7s</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">Baja</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #dee2e6;">Random Forest</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">85%</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">3.8s</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">Media</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #dee2e6;">Red Neuronal</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">88%</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">8.2s</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">Alta</td>
+                            </tr>
+                            <tr style="background: #e7f3ff; font-weight: bold;">
+                                <td style="padding: 10px; border: 1px solid #dee2e6;">Algoritmo Evolutivo</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">92%</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">4.5s</td>
+                                <td style="padding: 10px; text-align: center; border: 1px solid #dee2e6;">Muy Alta</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">💡 Respuestas a Preguntas del Foro</h3>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                        <h4 style="color: #495057; margin-bottom: 10px;">1️⃣ ¿Precisión o Eficiencia Computacional?</h4>
+                        <p><strong>Respuesta:</strong> Enfoque <strong>contextual y adaptativo</strong></p>
+                        <ul style="list-style-position: inside; line-height: 1.8; margin-top: 10px;">
+                            <li><strong>Diagnóstico crítico:</strong> Priorizar precisión ≥95%</li>
+                            <li><strong>Screening poblacional:</strong> Balance 85% precisión + alto volumen</li>
+                            <li><strong>Investigación:</strong> Adaptabilidad para nuevos biomarcadores</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                        <h4 style="color: #495057; margin-bottom: 10px;">2️⃣ ¿Impacto en Planeación de Proyectos?</h4>
+                        <p><strong>Respuesta:</strong> Reducción del <strong>35-45% en tiempos totales</strong></p>
+                        <ul style="list-style-position: inside; line-height: 1.8; margin-top: 10px;">
+                            <li><strong>Planificación:</strong> -25% (6 semanas vs 8)</li>
+                            <li><strong>Desarrollo:</strong> -25% (12 semanas vs 16)</li>
+                            <li><strong>Validación:</strong> -33% (8 semanas vs 12)</li>
+                            <li><strong>Implementación:</strong> -30% (7 semanas vs 10)</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Total:</strong> 33 semanas vs 46 semanas (ahorro de 13 semanas)</p>
+                    </div>
+
+                    <h3 style="color: #2a5298; margin-top: 20px; margin-bottom: 10px;">💰 Análisis Económico</h3>
+                    <ul style="list-style-position: inside; line-height: 1.8;">
+                        <li><strong>Inversión inicial:</strong> $150,000 USD</li>
+                        <li><strong>ROI Año 1:</strong> 42-258% ($63K-$387K utilidad)</li>
+                        <li><strong>Break-even:</strong> Mes 6-9</li>
+                        <li><strong>Impacto clínico:</strong> 2,000-5,000 vidas salvadas/año</li>
+                        <li><strong>Valor por paciente:</strong> $20K-56K (diagnóstico + tratamiento optimizado)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2a5298; margin: 30px 0 20px;">📁 Recursos del Foro Semana 5</h2>
+            
+            <div class="resource-links">
+                <a href="foro_semana_5/visualizador_participaciones.html" class="resource-link" target="_blank">
+                    <span class="resource-icon">📝</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Participaciones Completas del Foro</div>
+                        <div class="resource-desc">Visualización profesional con navegación interactiva</div>
+                    </div>
+                </a>
+
+                <a href="foro_semana_5/visualizador_reporte.html" class="resource-link" target="_blank">
+                    <span class="resource-icon">📊</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Reporte Técnico Detallado</div>
+                        <div class="resource-desc">Análisis exhaustivo de 20+ páginas con índice navegable</div>
+                    </div>
+                </a>
+
+                <a href="foro_semana_5/visualizador_graficos.html" class="resource-link" target="_blank">
+                    <span class="resource-icon">📈</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Visualizaciones Avanzadas</div>
+                        <div class="resource-desc">Dashboard de 12 gráficos + infografía ejecutiva con zoom</div>
+                    </div>
+                </a>
+
+                <a href="foro_semana_5/README_COMPLETO.md" class="resource-link" target="_blank">
+                    <span class="resource-icon">📚</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Documentación Técnica Completa</div>
+                        <div class="resource-desc">50+ páginas con referencias APA 7 y fundamentación teórica</div>
+                    </div>
+                </a>
+
+                <a href="foro_semana_5/" class="resource-link" target="_blank">
+                    <span class="resource-icon">📁</span>
+                    <div class="resource-text">
+                        <div class="resource-title">Explorar Archivos del Proyecto</div>
+                        <div class="resource-desc">Acceso directo a todos los archivos y código fuente</div>
+                    </div>
+                </a>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h2 style="text-align: center; color: #2a5298; margin-bottom: 20px;">🚀 Ejecutar el Proyecto</h2>
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="color: #495057; margin-bottom: 15px;">Requisitos:</h4>
+                        <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; overflow-x: auto;">pip install numpy pandas matplotlib seaborn scikit-learn scipy psutil</pre>
+                        
+                        <h4 style="color: #495057; margin: 20px 0 15px;">Ejecutar análisis completo:</h4>
+                        <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; overflow-x: auto;">cd foro_semana_5
+python main_foro_semana_5.py</pre>
+
+                        <h4 style="color: #495057; margin: 20px 0 15px;">O usar el script bash:</h4>
+                        <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; overflow-x: auto;">cd foro_semana_5
+./ejecutar.sh</pre>
+
+                        <p style="margin-top: 20px; padding: 15px; background: #d1ecf1; border-radius: 8px; color: #0c5460;">
+                            <strong>⏱️ Tiempo de ejecución:</strong> 2-3 minutos<br>
+                            <strong>📁 Archivos generados:</strong> Participaciones, reporte técnico, visualizaciones PNG
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <strong>Computación Bioinspirada - NRC-3333</strong>
+                </div>
+                <div class="footer-text">
+                    Corporación Universitaria Minuto de Dios
+                </div>
+                <div class="footer-text">
+                    Profesor: Geovanny Alberto Catamuscay Medina
+                </div>
+                <div class="footer-text" style="margin-top: 15px;">
+                    👨‍💻 Leonardo Mosquera (000922268) • 👩‍💻 Jessica Silva (000918680)
+                </div>
+                <div class="footer-text" style="margin-top: 10px; opacity: 0.7;">
+                    © 2025 - Grupo 5 • Todos los derechos reservados
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/leomos2022/computacion-bioinspirada" class="footer-link" target="_blank">
+                        💻 GitHub
+                    </a>
+                    <a href="https://leomos2022.github.io/computacion-bioinspirada/" class="footer-link" target="_blank">
+                        🌐 Demo en Vivo
+                    </a>
+                    <a href="mailto:leonardo.mosquera@uniminuto.edu.co" class="footer-link">
+                        📧 Contacto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            // Actualizar tabs activos
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Encontrar y activar el tab correspondiente
+            const clickedTab = event ? event.currentTarget : 
+                             Array.from(tabs).find(tab => 
+                                 tab.textContent.toLowerCase().includes(sectionId.replace('-', ' '))
+                             );
+            if (clickedTab) {
+                clickedTab.classList.add('active');
+            }
+
+            // Scroll suave al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Efecto de carga
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

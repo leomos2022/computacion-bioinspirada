@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participaciones del Foro - Semana 5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #0424D9 0%, #031473 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #031CA6 0%, #030C40 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            background: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid #0424D9;
+            color: #031CA6;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #0424D9;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(4, 36, 217, 0.3);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .author-card {
+            background: linear-gradient(135deg, #0424D9 0%, #031CA6 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-icon {
+            font-size: 60px;
+        }
+
+        .author-info h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .document-content {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.9;
+        }
+
+        .document-content h2 {
+            color: #031CA6;
+            font-size: 28px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #0424D9;
+            padding-bottom: 10px;
+        }
+
+        .document-content h3 {
+            color: #031473;
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .document-content h4 {
+            color: #030C40;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .document-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .document-content ul, .document-content ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        .document-content li {
+            margin-bottom: 10px;
+        }
+
+        .document-content strong {
+            color: #031CA6;
+        }
+
+        .document-content code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #031473;
+        }
+
+        .document-content pre {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #0424D9;
+        }
+
+        .document-content blockquote {
+            background: #e7f0ff;
+            border-left: 4px solid #0424D9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .document-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .document-content table th {
+            background: #031CA6;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .document-content table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .document-content table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(4, 36, 217, 0.1) 0%, rgba(3, 20, 115, 0.1) 100%);
+            border-left: 4px solid #0424D9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background: #0D1326;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #0424D9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #031CA6;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            background: #0424D9;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(4, 36, 217, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: #031CA6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(4, 36, 217, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .author-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .document-content {
+                font-size: 14px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #031CA6;
+            font-size: 18px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0424D9;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Participaciones del Foro</h1>
+            <p>Foro Semana 5: Eficiencia de los Métodos de Análisis de Datos</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('participacion')">
+                👩‍💻 Participación Principal
+            </button>
+            <button class="nav-btn" onclick="showSection('retroalimentacion')">
+                🔬 Retroalimentación
+            </button>
+            <button class="nav-btn" onclick="showSection('conclusion')">
+                🎯 Conclusión
+            </button>
+        </div>
+
+        <div class="content">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando contenido...</p>
+            </div>
+
+            <!-- Participación Principal -->
+            <div id="participacion" class="section active" style="display:none;">
+                <div class="author-card">
+                    <div class="author-icon">👩‍💻</div>
+                    <div class="author-info">
+                        <h2>Jessica Silva</h2>
+                        <p>ID: 000918680 | Grupo 5</p>
+                        <p>Participación Principal</p>
+                    </div>
+                </div>
+                <div id="participacion-content" class="document-content"></div>
+            </div>
+
+            <!-- Retroalimentación -->
+            <div id="retroalimentacion" class="section">
+                <div class="author-card">
+                    <div class="author-icon">👨‍💻</div>
+                    <div class="author-info">
+                        <h2>Leonardo Mosquera</h2>
+                        <p>ID: 000922268 | Grupo 5</p>
+                        <p>Retroalimentación Técnica</p>
+                    </div>
+                </div>
+                <div id="retroalimentacion-content" class="document-content"></div>
+            </div>
+
+            <!-- Conclusión -->
+            <div id="conclusion" class="section">
+                <div class="author-card">
+                    <div class="author-icon">👨‍💻</div>
+                    <div class="author-info">
+                        <h2>Leonardo Mosquera</h2>
+                        <p>ID: 000922268 | Grupo 5</p>
+                        <p>Conclusión Integradora</p>
+                    </div>
+                </div>
+                <div id="conclusion-content" class="document-content"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Computación Bioinspirada - NRC-3333</strong></p>
+            <p>Corporación Universitaria Minuto de Dios</p>
+            <p>Profesor: Geovanny Alberto Catamuscay Medina</p>
+            <p style="margin-top: 15px;">
+                <a href="../portal_foros.html">← Volver al Portal Principal</a>
+            </p>
+        </div>
+    </div>
+
+    <a href="../portal_foros.html" class="back-button">← Volver</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        async function loadMarkdownFile() {
+            try {
+                const response = await fetch('foro_semana_5_participaciones.md');
+                const text = await response.text();
+                
+                // Dividir el contenido en secciones
+                const sections = text.split('##');
+                
+                // Encontrar y procesar cada sección
+                let participacionContent = '';
+                let retroalimentacionContent = '';
+                let conclusionContent = '';
+                
+                sections.forEach(section => {
+                    if (section.includes('PARTICIPACIÓN PRINCIPAL') || section.includes('Participación Principal')) {
+                        participacionContent = '##' + section;
+                    } else if (section.includes('RETROALIMENTACIÓN') || section.includes('Retroalimentación')) {
+                        retroalimentacionContent = '##' + section;
+                    } else if (section.includes('CONCLUSIÓN') || section.includes('Conclusión')) {
+                        conclusionContent = '##' + section;
+                    }
+                });
+                
+                // Convertir Markdown a HTML usando marked.js
+                if (typeof marked !== 'undefined') {
+                    document.getElementById('participacion-content').innerHTML = marked.parse(participacionContent);
+                    document.getElementById('retroalimentacion-content').innerHTML = marked.parse(retroalimentacionContent);
+                    document.getElementById('conclusion-content').innerHTML = marked.parse(conclusionContent);
+                } else {
+                    // Fallback: mostrar texto plano
+                    document.getElementById('participacion-content').innerHTML = '<pre>' + participacionContent + '</pre>';
+                    document.getElementById('retroalimentacion-content').innerHTML = '<pre>' + retroalimentacionContent + '</pre>';
+                    document.getElementById('conclusion-content').innerHTML = '<pre>' + conclusionContent + '</pre>';
+                }
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('participacion').style.display = 'block';
+            } catch (error) {
+                console.error('Error cargando archivo:', error);
+                document.getElementById('loading').innerHTML = '<p style="color: red;">Error al cargar el contenido. Por favor, verifica que el archivo existe.</p>';
+            }
+        }
+
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+
+            // Mostrar la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+            selectedSection.style.display = 'block';
+
+            // Actualizar botones
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cargar contenido al iniciar
+        window.addEventListener('load', loadMarkdownFile);
+    </script>
+</body>
+</html>
