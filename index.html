@@ -3,51 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Bioinspirado para Cultivos Inteligentes</title>
+    <meta http-equiv="refresh" content="0; url=./portal_foros.html">
+    <title>Computación Bioinspirada - Redirigiendo...</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: linear-gradient(135deg, #0424D9 0%, #031473 100%);
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
         }
-        .container {
-            max-width: 800px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
+        .loading {
             text-align: center;
-            margin: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 28px;
+            margin-bottom: 10px;
         }
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 1.3em;
-            margin-bottom: 30px;
+        p {
+            font-size: 16px;
+            opacity: 0.9;
         }
-        .demo-button {
-            display: inline-block;
-            background: linear-gradient(90deg, #4CAF50, #45a049);
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2em;
+        a {
+            color: #4ADE80;
             text-decoration: none;
-            border-radius: 50px;
-            margin: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-weight: 600;
         }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="spinner"></div>
+        <h1>🎓 Computación Bioinspirada</h1>
+        <p>Redirigiendo al portal principal...</p>
+        <p style="margin-top: 20px;">Si no redirige automáticamente, <a href="./portal_foros.html">haz clic aquí</a></p>
+    </div>
+</body>
+</html>
         .demo-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
