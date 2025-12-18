@@ -202,7 +202,7 @@
         /* Card Grid */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
@@ -214,6 +214,8 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 2px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -347,38 +349,116 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .header {
-                padding: 25px;
+                padding: 25px 15px;
             }
 
             .university-name {
-                font-size: 22px;
+                font-size: 20px;
             }
 
             .course-info {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .participants {
-                gap: 30px;
-                padding: 20px;
+                gap: 25px;
+                padding: 20px 15px;
+            }
+
+            .participant-icon {
+                font-size: 32px;
+            }
+
+            .participant-name {
+                font-size: 18px;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
             }
 
             .nav-tab {
-                padding: 15px 20px;
-                min-width: 200px;
+                padding: 18px 20px;
+                min-width: 100%;
+                width: 100%;
+            }
+
+            .nav-tab-icon {
+                font-size: 24px;
             }
 
             .content-section {
-                padding: 20px;
+                padding: 20px 15px;
+            }
+
+            .section-header {
+                padding: 20px 15px;
             }
 
             .section-title {
-                font-size: 24px;
+                font-size: 22px;
+            }
+
+            .section-description {
+                font-size: 14px;
             }
 
             .card-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                font-size: 40px;
+            }
+
+            .card-title {
+                font-size: 20px;
+            }
+
+            .card-content {
+                font-size: 14px;
+            }
+
+            .card-link {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .university-name {
+                font-size: 18px;
+            }
+
+            .course-info {
+                font-size: 14px;
+            }
+
+            .participants {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .card-icon {
+                font-size: 36px;
             }
         }
 
@@ -470,8 +550,32 @@
                 <div class="section-description">Exploración de Sistemas Bioinspirados y Análisis de Datos Biológicos</div>
             </div>
 
+            <!-- Acceso Rápido a Foros -->
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h3 style="text-align: center; color: #031CA6; margin-bottom: 25px; font-size: 24px;">📚 Acceso Rápido a Foros</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <a href="#" onclick="showSection('foro-semana-3'); return false;" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 25px; border-radius: 12px; text-decoration: none; text-align: center; transition: transform 0.3s, box-shadow 0.3s; display: block; box-shadow: 0 4px 15px rgba(40,167,69,0.3);" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(40,167,69,0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(40,167,69,0.3)'">
+                        <div style="font-size: 48px; margin-bottom: 10px;">🌾</div>
+                        <div style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">Foro Semana 3</div>
+                        <div style="font-size: 14px; opacity: 0.95;">Cultivos Inteligentes</div>
+                    </a>
+                    <a href="#" onclick="showSection('foro-semana-5'); return false;" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); color: white; padding: 25px; border-radius: 12px; text-decoration: none; text-align: center; transition: transform 0.3s, box-shadow 0.3s; display: block; box-shadow: 0 4px 15px rgba(23,162,184,0.3);" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(23,162,184,0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(23,162,184,0.3)'">
+                        <div style="font-size: 48px; margin-bottom: 10px;">🧬</div>
+                        <div style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">Foro Semana 5</div>
+                        <div style="font-size: 14px; opacity: 0.95;">Análisis de Datos</div>
+                    </a>
+                    <a href="foro_semana_7/FORO_SEMANA_7_COMPLETO.html" target="_blank" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; text-decoration: none; text-align: center; transition: transform 0.3s, box-shadow 0.3s; display: block; box-shadow: 0 4px 15px rgba(102,126,234,0.3);" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(102,126,234,0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(102,126,234,0.3)'">
+                        <div style="font-size: 48px; margin-bottom: 10px;">🧠</div>
+                        <div style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">Foro Semana 7</div>
+                        <div style="font-size: 14px; opacity: 0.95;">Arquitecturas Cognitivas</div>
+                    </a>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; color: #031CA6; margin-bottom: 20px; font-size: 22px;">📖 Información Detallada de Cada Foro</h3>
+
             <div class="card-grid">
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #28a745;">
                     <div class="card-icon">🌾</div>
                     <div class="card-title">Foro Semana 3</div>
                     <div class="card-content">
@@ -488,12 +592,12 @@
                             <li>📊 40 células de memoria</li>
                         </ul>
                     </div>
-                    <a href="#" onclick="showSection('foro-semana-3'); return false;" class="card-link">
+                    <a href="#" onclick="showSection('foro-semana-3'); return false;" class="card-link" style="background: #28a745;">
                         Ver Foro Completo →
                     </a>
                 </div>
 
-                <div class="card">
+                <div class="card" style="border-left: 5px solid #17a2b8;">
                     <div class="card-icon">🧬</div>
                     <div class="card-title">Foro Semana 5</div>
                     <div class="card-content">
@@ -509,7 +613,28 @@
                             <li>🏥 Vidas salvadas: 2,000-5,000/año</li>
                         </ul>
                     </div>
-                    <a href="#" onclick="showSection('foro-semana-5'); return false;" class="card-link">
+                    <a href="#" onclick="showSection('foro-semana-5'); return false;" class="card-link" style="background: #17a2b8;">
+                        Ver Foro Completo →
+                    </a>
+                </div>
+
+                <div class="card" style="border-left: 5px solid #667eea;">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Foro Semana 7</div>
+                    <div class="card-content">
+                        <strong>Arquitecturas Cognitivas Bioinspiradas</strong>
+                        <p style="margin-top: 10px;">
+                            Sistema Híbrido de Diagnóstico Médico que integra paradigmas Simbólico, Emergente e Inductivo. 
+                            Fundamentado en 40 años de investigación en arquitecturas cognitivas.
+                        </p>
+                        <ul style="margin-top: 15px; list-style-position: inside;">
+                            <li>✅ Precisión: 89%</li>
+                            <li>⚡ Tiempo: 1.5 segundos</li>
+                            <li>🔬 84 arquitecturas analizadas</li>
+                            <li>📊 Gráficas interactivas</li>
+                        </ul>
+                    </div>
+                    <a href="foro_semana_7/FORO_SEMANA_7_COMPLETO.html" target="_blank" class="card-link" style="background: #667eea;">
                         Ver Foro Completo →
                     </a>
                 </div>
