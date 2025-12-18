@@ -194,4 +194,4 @@ python demo_rapida_foro.py
 
 *Preparado por: Leonardo Mosquera*  
 *Grupo 5 - Computación Bioinspirada*  
-*Noviembre 21, 2024*
+*Noviembre 21, 2025*

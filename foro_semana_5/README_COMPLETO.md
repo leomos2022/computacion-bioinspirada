@@ -25,7 +25,7 @@
 
 ## 📖 Resumen Ejecutivo
 
-Este proyecto implementa un **Algoritmo Evolutivo (EA)** bioinspirado para el análisis de datos genómicos de alta dimensionalidad en el contexto de medicina personalizada. La investigación aborda un caso real de una startup de bioinformática que busca optimizar la detección de patrones mutacionales en cáncer de pulmón (EGFR, TP53, KRAS) mediante técnicas computacionales inspiradas en la evolución biológica (Goldberg, 1989; Holland, 1992).
+Este proyecto implementa un **Algoritmo Evolutivo (EA)** bioinspirado para el análisis de datos genómicos de alta dimensionalidad en el contexto de medicina personalizada. La investigación aborda el caso de una startup de bioinformática que busca optimizar la detección de patrones de mutación en muestras biológicas (genes oncológicos como EGFR, TP53, KRAS) con el fin de anticipar respuestas a tratamientos médicos personalizados, mediante técnicas computacionales inspiradas en la evolución biológica (Goldberg, 1989; Holland, 1992).
 
 ### Hallazgos Clave
 
@@ -41,16 +41,16 @@ Este proyecto implementa un **Algoritmo Evolutivo (EA)** bioinspirado para el an
 
 ### Objetivo General
 
-Evaluar la eficiencia y viabilidad técnico-económica de un algoritmo evolutivo para análisis genómico comparado con métodos estadísticos tradicionales, en el contexto de medicina personalizada para oncología de precisión.
+Evaluar la eficiencia y viabilidad técnico-económica de un algoritmo evolutivo inspirado en la selección natural para el análisis de grandes volúmenes de datos genómicos, comparando su rendimiento con métodos estadísticos tradicionales para detectar patrones de mutación en muestras biológicas y anticipar respuestas a tratamientos médicos personalizados.
 
 ### Objetivos Específicos
 
-1. **Implementar** un algoritmo evolutivo completo con operadores genéticos optimizados (selección por torneo, cruza uniforme, mutación adaptativa)
-2. **Generar** datos genómicos sintéticos realistas que repliquen mutaciones clínicas documentadas (EGFR L858R, TP53 R273H, KRAS G12C)
-3. **Comparar** cuantitativamente el rendimiento del EA vs métodos tradicionales (Regresión Logística, SVM, Random Forest, Redes Neuronales)
+1. **Implementar** un algoritmo evolutivo completo con operadores genéticos optimizados (selección por torneo, cruza uniforme, mutación adaptativa) para analizar datos genómicos
+2. **Generar** datos genómicos sintéticos realistas que repliquen patrones de mutación oncológicos documentados (EGFR, TP53, KRAS, BRCA1, CYP2D6)
+3. **Comparar** cuantitativamente el rendimiento del EA vs métodos estadísticos tradicionales mediante tres métricas clave: precisión en clasificación, velocidad de procesamiento y consumo de recursos computacionales
 4. **Visualizar** resultados mediante dashboards científicos de 12 gráficos y una infografía ejecutiva tipo póster
-5. **Analizar** la viabilidad económica considerando ROI, break-even, costos operativos y proyecciones financieras a 5 años
-6. **Responder** las preguntas del foro con fundamento teórico-práctico y evidencia empírica
+5. **Analizar** la viabilidad económica considerando ROI, break-even, costos operativos y proyecciones financieras para justificar la inversión en términos de eficiencia
+6. **Responder** las preguntas del foro con fundamento teórico-práctico: priorización precisión vs eficiencia computacional, y determinancia del análisis de datos biológicos en planeación de proyectos
 
 ---
 
@@ -261,11 +261,11 @@ Para evaluar el algoritmo, generamos **10,000 pares de bases** sintéticos que r
 
 ### Patrones Clínicos Implementados
 
-#### 1. **EGFR L858R** (Carcinoma Pulmonar)
+#### 1. **EGFR L858R** (Múltiples Carcinomas)
 - **Tipo:** Mutación oncogénica
 - **Cromosoma:** 7p11.2
-- **Frecuencia poblacional:** 15% en adenocarcinoma pulmonar
-- **Respuesta tratamiento:** 68% responden a inhibidores de tirosina quinasa (Gefitinib, Erlotinib)
+- **Frecuencia poblacional:** 10-15% en adenocarcinomas (pulmón, colon, páncreas)
+- **Respuesta tratamiento:** 60-70% responden a inhibidores de tirosina quinasa (Gefitinib, Erlotinib, Cetuximab)
 - **Referencia:** Lynch et al. (2004), *New England Journal of Medicine*
 
 #### 2. **TP53 R273H** (Múltiples tipos tumorales)
@@ -275,11 +275,11 @@ Para evaluar el algoritmo, generamos **10,000 pares de bases** sintéticos que r
 - **Característica:** Pérdida de función en proteína p53 → descontrol ciclo celular
 - **Referencia:** Vogelstein et al. (2013), *Science*
 
-#### 3. **KRAS G12C** (Cáncer Colorrectal, Pulmón)
+#### 3. **KRAS G12C** (Múltiples Carcinomas)
 - **Tipo:** Mutación oncogénica
 - **Cromosoma:** 12p12.1
-- **Frecuencia:** 13% en cáncer de pulmón no microcítico
-- **Respuesta:** 55% responden a Sotorasib (inhibidor selectivo KRAS G12C)
+- **Frecuencia:** 13% en cáncer de pulmón, 3-5% en cáncer colorrectal, 2% en páncreas
+- **Respuesta:** 55-60% responden a inhibidores selectivos KRAS G12C (Sotorasib, Adagrasib)
 - **Referencia:** Skoulidis et al. (2021), *New England Journal of Medicine*
 
 #### 4. **CYP2D6** (Farmacogenómica)
@@ -508,15 +508,15 @@ Año 5: ROI = ($5,120K - $150K) / $150K = +3,313% ✅✅
 
 ### Vidas Salvadas Proyectadas
 
-Asumiendo implementación en 30 hospitales (escenario moderado, Año 3):
+Asumiendo implementación en 30 hospitales oncológicos (escenario moderado, Año 3):
 
 ```
-Cálculo conservador:
+Cálculo conservador (múltiples tipos de cáncer):
 - Pacientes analizados/hospital/año: 200
 - Total pacientes: 30 × 200 = 6,000 pacientes/año
 - Mejora diagnóstica: 92% vs 88% (métodos actuales) = +4 puntos
 - Diagnósticos correctos adicionales: 6,000 × 0.04 = 240 pacientes/año
-- Tasa supervivencia con tratamiento temprano: 85% vs 45% = +40 puntos
+- Tasa supervivencia con tratamiento temprano personalizado: 85% vs 45% = +40 puntos
 - Vidas salvadas: 240 × 0.40 = 96 vidas/año
 
 Proyección optimista (Año 5, 75 hospitales):
@@ -525,10 +525,10 @@ Proyección optimista (Año 5, 75 hospitales):
 
 ### Reducción de Costos del Sistema de Salud
 
-**Costo tratamiento cáncer de pulmón:**
-- Etapa I (detección temprana): $120,000 USD por paciente
-- Etapa III-IV (detección tardía): $280,000 USD por paciente
-- **Ahorro por diagnóstico temprano:** $160,000 USD
+**Costo promedio tratamiento oncológico (múltiples tipos de cáncer):**
+- Etapa I-II (detección temprana con tratamiento personalizado): $120,000 USD por paciente
+- Etapa III-IV (detección tardía con tratamiento estándar): $280,000 USD por paciente
+- **Ahorro por diagnóstico temprano y personalización:** $160,000 USD
 
 **Impacto económico sistémico (Año 3, 6,000 pacientes):**
 ```
@@ -799,17 +799,18 @@ Sprint 6 (2 sem): Documentación + despliegue piloto
 
 ### Recomendaciones Estratégicas
 
-#### Para la Startup
+#### Para la Startup de Bioinformática
 
-1. **Corto plazo (0-6 meses):**
-   - Validación clínica con 500 muestras reales de pacientes
+1. **Corto plazo (0-6 meses) - Decisión de escalamiento:**
+   - Validación clínica con 500 muestras reales de pacientes oncológicos
+   - Justificación de inversión: demostrar ventajas en adaptabilidad vs complejidad computacional
    - Certificaciones regulatorias (FDA, EMA, INVIMA)
    - Alianza estratégica con 2-3 hospitales piloto
 
 2. **Mediano plazo (6-18 meses):**
-   - Expansión a otros tipos de cáncer (mama, colon, próstata)
-   - Integración con plataformas de secuenciación (Illumina, PacBio)
-   - Desarrollo de API cloud para clientes B2B
+   - Expansión a diversas aplicaciones: oncología (mama, colon, próstata, pulmón), farmacogenómica, enfermedades raras
+   - Integración con plataformas de secuenciación (Illumina, PacBio, Oxford Nanopore)
+   - Desarrollo de API cloud para clientes B2B con métricas de rendimiento en tiempo real
 
 3. **Largo plazo (18+ meses):**
    - Investigación algoritmos híbridos (EA + Deep Learning)
